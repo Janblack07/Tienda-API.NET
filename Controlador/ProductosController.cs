@@ -3,6 +3,7 @@ using API_TIENDA.Models;
 using API_TIENDA.Servicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_TIENDA.Controlador
 {
@@ -70,6 +71,40 @@ namespace API_TIENDA.Controlador
                 };
 
                 return Ok(new { message = " El Producto es :", productoDto }); // 200 OK
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al obtener el producto.", details = ex.Message }); // 500 Internal Server Error
+            }
+        }
+
+        [HttpGet]
+        [Route("SearchProductByName/{nombre}")]
+        public async Task<IActionResult> GetSearchProductByName(string nombre)
+        {
+            try
+            {
+                // Buscar el producto por nombre (ignorando mayúsculas/minúsculas)
+                var producto = await _context.Productos
+                    .FirstOrDefaultAsync(p => p.Nombre.ToLower() == nombre.ToLower());
+
+                if (producto == null)
+                {
+                    return NotFound(new { message = "Producto no encontrado." }); // 404 Not Found
+                }
+
+                // Mapear al DTO
+                var productoDto = new ProductosDto
+                {
+                    Id = producto.Id,
+                    Nombre = producto.Nombre,
+                    Precio = producto.Precio,
+                    Descripcion = producto.Descripcion,
+                    ImageUrl = producto.ImageUrl,
+                    CategoriaId = producto.CategoriaId // Incluir la categoría en la respuesta
+                };
+
+                return Ok(new { message = "El Producto encontrado es:", productoDto }); // 200 OK
             }
             catch (Exception ex)
             {
