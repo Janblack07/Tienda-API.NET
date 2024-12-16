@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace API_TIENDA.Models
 {
@@ -18,6 +19,7 @@ namespace API_TIENDA.Models
 
         // Relación con la categoría
         public int CategoriaId { get; set; }  // Clave foránea
+        [JsonIgnore] // Ignora la propiedad para evitar ciclos
         public Categoria Categoria { get; set; }  // Relación con la entidad Categoria
 
     }
