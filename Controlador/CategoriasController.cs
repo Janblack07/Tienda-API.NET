@@ -3,6 +3,7 @@ using API_TIENDA.Models;
 using API_TIENDA.Servicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_TIENDA.Controlador
 {
@@ -73,7 +74,40 @@ namespace API_TIENDA.Controlador
                 return StatusCode(500, new { message = "Error al obtener la categoria.", details = ex.Message }); // 500 Internal Server Error
             }
         }
-        
+
+        [HttpGet]
+        [Route("SearchCategoriesByName/{nombre}")]
+        public async Task<IActionResult> GetSearchCategoriesByName(string nombre)
+        {
+            try
+            {
+                // Buscar la categoría por nombre (ignorando mayúsculas/minúsculas)
+                var categoria = await _context.Categorias
+                    .FirstOrDefaultAsync(c => c.Nombre.ToLower() == nombre.ToLower());
+
+                if (categoria == null)
+                {
+                    return NotFound(new { message = "Categoría no encontrada." }); // 404 Not Found
+                }
+
+                // Mapear la categoría al DTO
+                var categoriaDto = new CategoriasDto
+                {
+                    Id = categoria.Id,
+                    Nombre = categoria.Nombre,
+                    Descripcion = categoria.Descripcion,
+                    ImageUrl = categoria.ImageUrl
+                };
+
+                return Ok(new { message = "La categoría encontrada es:", categoriaDto }); // 200 OK
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al obtener la categoría.", details = ex.Message }); // 500 Internal Server Error
+            }
+        }
+
+
         [HttpPost]
         [Route("AddCategories")]
         public async Task<IActionResult> CreateCategories([FromForm] CreateCategoriaDto createCategoriaDto)
