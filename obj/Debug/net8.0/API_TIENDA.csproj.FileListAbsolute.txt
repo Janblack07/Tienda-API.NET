@@ -168,3 +168,4 @@ F:\Programas\C#\API_TIENDA\API_TIENDA\obj\Debug\net8.0\refint\API_TIENDA.dll
 F:\Programas\C#\API_TIENDA\API_TIENDA\obj\Debug\net8.0\API_TIENDA.pdb
 F:\Programas\C#\API_TIENDA\API_TIENDA\obj\Debug\net8.0\API_TIENDA.genruntimeconfig.cache
 F:\Programas\C#\API_TIENDA\API_TIENDA\obj\Debug\net8.0\ref\API_TIENDA.dll
+F:\Programas\C#\API_TIENDA\API_TIENDA\obj\Debug\net8.0\API_TIENDA.sourcelink.json

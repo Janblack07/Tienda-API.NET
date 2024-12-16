@@ -115,7 +115,6 @@ namespace API_TIENDA.Controlador
             try
             {
                 var producto = await _context.Productos.FindAsync(id);
-
                 if (producto == null)
                 {
                     return NotFound(new { message = "Producto no encontrado." });
@@ -123,10 +122,8 @@ namespace API_TIENDA.Controlador
 
                 if (!string.IsNullOrEmpty(updateProductoDto.Nombre))
                     producto.Nombre = updateProductoDto.Nombre;
-
                 if (updateProductoDto.Precio.HasValue)
                     producto.Precio = updateProductoDto.Precio.Value;
-
                 if (!string.IsNullOrEmpty(updateProductoDto.Descripcion))
                     producto.Descripcion = updateProductoDto.Descripcion;
 
@@ -136,15 +133,16 @@ namespace API_TIENDA.Controlador
                     // Eliminar la imagen anterior de Cloudinary
                     if (!string.IsNullOrEmpty(producto.ImageUrl))
                     {
+
+                        // Asegúrate de que publicId sea solo el ID de la imagen sin extensión
                         var publicId = producto.ImageUrl.Split('/').Last().Split('.').First();
 
-                        // Asegúrate de que el publicId no contenga la extensión
-                        if (publicId.Contains("."))
-                        {
-                            publicId = publicId.Split('.').First();  // Eliminar la extensión si existe
-                        }
+                        // Agregar la carpeta "productos/" de manera estática
+                        var fullPublicId = $"productos/{publicId}";
 
-                        await _cloudinaryService.DeleteImageAsync(publicId);
+
+                        // Aquí se pasa el publicId completo con la carpeta "productos/"
+                        await _cloudinaryService.DeleteImageAsync(fullPublicId);
                     }
 
                     // Subir la nueva imagen a Cloudinary
@@ -153,14 +151,14 @@ namespace API_TIENDA.Controlador
 
                 _context.Productos.Update(producto);
                 await _context.SaveChangesAsync();
-
-                return Ok(new { message = "Se ha actualizado el Producto : ", producto });
+                return Ok(new { message = "Se ha actualizado el Producto: ", producto });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { message = "Error al actualizar el producto.", details = ex.Message });
             }
         }
+
         [HttpDelete]
         [Route("DeleteProduct/{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
@@ -177,8 +175,15 @@ namespace API_TIENDA.Controlador
                 // Eliminar la imagen de Cloudinary si existe
                 if (!string.IsNullOrEmpty(producto.ImageUrl))
                 {
+                    // Asegúrate de que publicId sea solo el ID de la imagen sin extensión
                     var publicId = producto.ImageUrl.Split('/').Last().Split('.').First();
-                    await _cloudinaryService.DeleteImageAsync(publicId);
+
+                    // Agregar la carpeta "productos/" de manera estática
+                    var fullPublicId = $"productos/{publicId}";
+
+
+                    // Aquí se pasa el publicId completo con la carpeta "productos/"
+                    await _cloudinaryService.DeleteImageAsync(fullPublicId);
                 }
 
                 _context.Productos.Remove(producto);
@@ -191,7 +196,6 @@ namespace API_TIENDA.Controlador
                 return StatusCode(500, new { message = "Error al eliminar el producto.", details = ex.Message });
             }
         }
-
 
     }
 }

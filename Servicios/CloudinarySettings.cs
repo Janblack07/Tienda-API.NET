@@ -52,20 +52,10 @@ namespace API_TIENDA.Servicios
         public async Task DeleteImageAsync(string publicId)
         {
             if (string.IsNullOrEmpty(publicId))
-                return;
+                throw new ArgumentException("El publicId no puede ser nulo o vacío.");
 
             var deleteParams = new DeletionParams(publicId);
             var result = await _cloudinary.DestroyAsync(deleteParams);
-
-            // Verificar si la eliminación fue exitosa
-            if (result?.StatusCode == HttpStatusCode.OK)
-            {
-                Console.WriteLine("Imagen eliminada correctamente de Cloudinary.");
-            }
-            else
-            {
-                Console.WriteLine("Error al eliminar la imagen de Cloudinary.");
-            }
         }
 
     }
