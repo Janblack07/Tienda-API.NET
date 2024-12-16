@@ -16,5 +16,9 @@ namespace API_TIENDA.Models
 
         public String ImageUrl { get; set; } // Para almacenar la URL de la imagen
 
+        // Relación con la categoría
+        public int CategoriaId { get; set; }  // Clave foránea
+        public Categoria Categoria { get; set; }  // Relación con la entidad Categoria
+
     }
 }
