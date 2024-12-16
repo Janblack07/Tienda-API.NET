@@ -33,8 +33,9 @@ namespace API_TIENDA.Controlador
                     Nombre = p.Nombre,
                     Precio = p.Precio,
                     Descripcion = p.Descripcion,
-                    ImageUrl = p.ImageUrl
-                }).ToList();
+                    ImageUrl = p.ImageUrl,
+                    CategoriaId = p.CategoriaId // Asegúrate de incluir la categoría en la respuesta
+            }).ToList();
 
                 return Ok(new { message = "Todos Los Productos : ", productos }); // 200 OK
             }
@@ -64,7 +65,8 @@ namespace API_TIENDA.Controlador
                     Nombre = producto.Nombre,
                     Precio = producto.Precio,
                     Descripcion = producto.Descripcion,
-                    ImageUrl = producto.ImageUrl
+                    ImageUrl = producto.ImageUrl,
+                    CategoriaId = producto.CategoriaId // Incluir categoría en la respuesta
                 };
 
                 return Ok(new { message = " El Producto es :", productoDto }); // 200 OK
@@ -81,6 +83,12 @@ namespace API_TIENDA.Controlador
         {
             try
             {
+                // Verificar si la categoría existe
+                var categoria = await _context.Categorias.FindAsync(createProductoDto.CategoriaId);
+                if (categoria == null)
+                {
+                    return BadRequest(new { message = "Categoría no encontrada." });
+                }
                 // Subir la imagen a Cloudinary
                 string imageUrl = null;
                 if (createProductoDto.Imagen != null)
@@ -93,7 +101,8 @@ namespace API_TIENDA.Controlador
                     Nombre = createProductoDto.Nombre,
                     Precio = createProductoDto.Precio,
                     Descripcion = createProductoDto.Descripcion,
-                    ImageUrl = imageUrl
+                    ImageUrl = imageUrl,
+                    CategoriaId = createProductoDto.CategoriaId // Relacionar el producto con la categoría
                 };
 
                 _context.Productos.Add(producto);
@@ -118,6 +127,16 @@ namespace API_TIENDA.Controlador
                 if (producto == null)
                 {
                     return NotFound(new { message = "Producto no encontrado." });
+                }
+                // Verificar si la categoría existe antes de asignarla
+                if (updateProductoDto.CategoriaId.HasValue)
+                {
+                    var categoria = await _context.Categorias.FindAsync(updateProductoDto.CategoriaId);
+                    if (categoria == null)
+                    {
+                        return BadRequest(new { message = "Categoría no encontrada." });
+                    }
+                    producto.CategoriaId = updateProductoDto.CategoriaId.Value; // Asignar la nueva categoría
                 }
 
                 if (!string.IsNullOrEmpty(updateProductoDto.Nombre))
