@@ -107,7 +107,6 @@ namespace API_TIENDA.Controlador
             }
         }
 
-
         [HttpPost]
         [Route("AddCategories")]
         public async Task<IActionResult> CreateCategories([FromForm] CreateCategoriaDto createCategoriaDto)
@@ -141,6 +140,7 @@ namespace API_TIENDA.Controlador
                 return StatusCode(500, new { message = "Error al crear la categoria.", details = ex.Message });
             }
         }
+       
         [HttpPut]
         [Route("UpdateCategories/{id}")]
         public async Task<IActionResult> UpdateCategories(int id, [FromForm] UpdateCategoriaDto updateCategoriaDto)

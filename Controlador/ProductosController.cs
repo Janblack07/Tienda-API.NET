@@ -112,6 +112,33 @@ namespace API_TIENDA.Controlador
             }
         }
 
+        [HttpGet]
+        [Route("PaginatedProducts")]
+        public async Task<IActionResult> GetPaginatedProducts([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var totalProductos = await _context.Productos.CountAsync();
+            var productos = await _context.Productos
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Select(producto => new ProductosDto
+                {
+                    Id = producto.Id,
+                    Nombre = producto.Nombre,
+                    Precio = producto.Precio,
+                    ImageUrl = producto.ImageUrl,
+                    CategoriaId = producto.CategoriaId // Asegúrate de incluir la categoría en la respuesta
+                })
+                .ToListAsync();
+
+            return Ok(new
+            {
+                totalProductos,
+                pageNumber,
+                pageSize,
+                productos
+            });
+        }
+
         [HttpPost]
         [Route("AddProduct")]
         public async Task<IActionResult> CreateProduct([FromForm] CreateProductoDto createProductoDto)

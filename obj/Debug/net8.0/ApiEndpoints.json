@@ -69,6 +69,22 @@
   },
   {
     "ContainingType": "API_TIENDA.Controlador.CategoriasController",
+    "Method": "GetSearchCategoriesByName",
+    "RelativePath": "api/Categorias/SearchCategoriesByName/{nombre}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nombre",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.CategoriasController",
     "Method": "UpdateCategories",
     "RelativePath": "api/Categorias/UpdateCategories/{id}",
     "HttpMethod": "PUT",
@@ -171,6 +187,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.ProductosController",
+    "Method": "GetSearchProductByName",
+    "RelativePath": "api/Productos/SearchProductByName/{nombre}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nombre",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
