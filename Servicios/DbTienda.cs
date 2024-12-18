@@ -2,6 +2,7 @@
 using API_TIENDA.Models;
 using API_TIENDA.Seeders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace API_TIENDA.Servicios
 {
@@ -16,8 +17,18 @@ namespace API_TIENDA.Servicios
         public DbSet<Categoria> Categorias {get ; set;}
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Rol> Roles { get; set; }
+        // Método OnConfiguring
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            // Ignorar la advertencia de cambios pendientes del modelo
+            optionsBuilder.ConfigureWarnings(warnings =>
+                warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
 
             // Relación entre Producto y Categoria

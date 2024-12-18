@@ -269,5 +269,83 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "GetClientes",
+    "RelativePath": "api/Usuario/ListClientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "GetEmpleados",
+    "RelativePath": "api/Usuario/ListEmpleados",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "Login",
+    "RelativePath": "api/Usuario/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API_TIENDA.Dto.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "GetPerfil",
+    "RelativePath": "api/Usuario/Perfil",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "RegisterCliente",
+    "RelativePath": "api/Usuario/RegisterCliente",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API_TIENDA.Dto.RegistroDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "RegisterEmpleado",
+    "RelativePath": "api/Usuario/RegisterEmpleado",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API_TIENDA.Dto.RegistroDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
