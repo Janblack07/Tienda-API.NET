@@ -178,6 +178,27 @@
   },
   {
     "ContainingType": "API_TIENDA.Controlador.ProductosController",
+    "Method": "GetPaginatedProducts",
+    "RelativePath": "api/Productos/PaginatedProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.ProductosController",
     "Method": "GetSearchProduct",
     "RelativePath": "api/Productos/SearchProduct/{id}",
     "HttpMethod": "GET",
@@ -245,6 +266,84 @@
         "Name": "CategoriaId",
         "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "GetClientes",
+    "RelativePath": "api/Usuario/ListClientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "GetEmpleados",
+    "RelativePath": "api/Usuario/ListEmpleados",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "Login",
+    "RelativePath": "api/Usuario/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API_TIENDA.Dto.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "GetPerfil",
+    "RelativePath": "api/Usuario/Perfil",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "RegisterCliente",
+    "RelativePath": "api/Usuario/RegisterCliente",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API_TIENDA.Dto.RegistroDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.UsuarioController",
+    "Method": "RegisterEmpleado",
+    "RelativePath": "api/Usuario/RegisterEmpleado",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API_TIENDA.Dto.RegistroDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
