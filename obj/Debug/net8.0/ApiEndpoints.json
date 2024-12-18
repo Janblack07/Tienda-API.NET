@@ -178,6 +178,27 @@
   },
   {
     "ContainingType": "API_TIENDA.Controlador.ProductosController",
+    "Method": "GetPaginatedProducts",
+    "RelativePath": "api/Productos/PaginatedProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TIENDA.Controlador.ProductosController",
     "Method": "GetSearchProduct",
     "RelativePath": "api/Productos/SearchProduct/{id}",
     "HttpMethod": "GET",
